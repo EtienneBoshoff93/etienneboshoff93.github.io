@@ -154,8 +154,13 @@ $.ajax({
         }
         console.log(result);
         $("#repo_count").append("Total Repos: " + result.length);
+        
     }
 });
+
+
+
+//message
 
 /* =========================================
  * styled Leaflet Map
