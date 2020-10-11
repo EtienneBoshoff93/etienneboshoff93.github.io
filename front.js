@@ -214,7 +214,7 @@ function map() {
                 icon: icon
             }).addTo(map);
 
-            marker.bindPopup("<div class='p-4'><h5>My address</h5><p>61 OR Tambo Street, Potchefstroom.</p></div>", {
+            marker.bindPopup("<div class='p-4'><h5>My address</h5><p>61 OR Tambo Street </p> <p>Potchefstroom</p> <p>2531</p> <p>(c) 074 2797225 </p></div>", {
                 minwidth: 200,
                 maxWidth: 600,
                 className: 'map-custom-popup'
