@@ -39,29 +39,6 @@ $(function () {
     });
 
 
-    /* =========================================
-     * testimonial slider
-     *  =======================================*/
-
-    $(".testimonials").owlCarousel({
-        nav: false,
-        dots: true,
-        responsiveClass: true,
-        responsive: {
-            0: {
-                items: 1
-            },
-            600: {
-                items: 1
-            },
-            1000: {
-                items: 3
-            },
-            1200: {
-                items: 4
-            }
-        }
-    });
 
 
     /* =========================================
@@ -112,65 +89,6 @@ $(function () {
     });
 
 
-    /* =========================================
-     * reference functionality
-     *  =======================================*/
-    $('.reference a').on('click', function (e) {
-
-        e.preventDefault();
-
-        var title = $(this).find('.reference-title').text(),
-            description = $(this).siblings('.reference-description').html();
-
-        $('#detail-title').text(title);
-        $('#detail-content').html(description);
-
-        var images = $(this).siblings('.reference-description').data('images').split(',');
-        if (images.length > 0) {
-            sliderContent = '';
-            for (var i = 0; i < images.length; ++i) {
-                sliderContent = sliderContent + '<div class="item"><img src=' + images[i] + ' alt="" class="img-fluid"></div>';
-            }
-        } else {
-            sliderContent = '';
-        }
-
-        openReference(sliderContent);
-
-    });
-
-    function openReference(sliderContent) {
-        $('#detail').slideDown();
-        $('#references-masonry').slideUp();
-
-
-        if (sliderContent !== '') {
-
-            var slider = $('#detail-slider');
-
-            if (slider.hasClass('owl-loaded')) {
-                slider.trigger('replace.owl.carousel', sliderContent);
-            } else {
-                slider.html(sliderContent);
-                slider.owlCarousel({
-                    nav: false,
-                    dots: true,
-                    items: 1
-                });
-
-            }
-        }
-    }
-
-
-    function closeReference() {
-        $('#references-masonry').slideDown();
-        $('#detail').slideUp();
-    }
-
-    $('#filter button, #detail .close').on('click', function () {
-        closeReference();
-    });
 
 
     /* =========================================
@@ -209,35 +127,8 @@ $(function () {
         $(this).removeClass($(this).data('animate-hover'));
     });
 
-    /* =========================================
-     * for demo purpose
-     *  =======================================*/
 
-    var stylesheet = $('link#theme-stylesheet');
-    $("<link id='new-stylesheet' rel='stylesheet'>").insertAfter(stylesheet);
-    var alternateColour = $('link#new-stylesheet');
 
-    if ($.cookie("theme_csspath")) {
-        alternateColour.attr("href", $.cookie("theme_csspath"));
-    }
-
-    $("#colour").change(function () {
-
-        if ($(this).val() !== '') {
-
-            var theme_csspath = 'css/style.' + $(this).val() + '.css';
-
-            alternateColour.attr("href", theme_csspath);
-
-            $.cookie("theme_csspath", theme_csspath, {
-                expires: 365,
-                path: document.URL.substr(0, document.URL.lastIndexOf('/'))
-            });
-
-        }
-
-        return false;
-    });
 
 });
 
@@ -310,3 +201,28 @@ function map() {
     }
 
 }
+
+/* =========================================
+ * Get list of repositries
+ *  =======================================*/
+// ------------------------------------------------------ //
+// Repositry from Github API
+// ------------------------------------------------------ //
+
+
+    $.ajax({
+        type: "GET",
+        url: "https://api.github.com/users/etienneboshoff93/repos",
+        dataType: "json",
+        success: function(result) {
+            for( i in result ) {
+                $("#repo_list").append(
+                    "<li><a href='" + result[i].html_url + "' target='_blank'>" +
+                    result[i].name + "</a></li>"
+                );
+                console.log("i: " + i);
+            }
+            console.log(result);
+            $("#repo_count").append("Total Repos: " + result.length);
+        }
+    });
