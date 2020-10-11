@@ -253,13 +253,13 @@ $(function () {
 function map() {
 
     var mapId = 'map',
-        mapCenter = [53.14, 8.22],
+        mapCenter = [-26.719152, 27.094521],
         mapMarker = true;
 
     if ($('#' + mapId).length > 0) {
 
         var icon = L.icon({
-            iconUrl: 'img/marker.png',
+            iconUrl: 'images/marker.png',
             iconSize: [25, 37.5],
             popupAnchor: [0, -18],
             tooltipAnchor: [0, 19]
@@ -300,7 +300,7 @@ function map() {
                 icon: icon
             }).addTo(map);
 
-            marker.bindPopup("<div class='p-4'><h5>Info Window Content</h5><p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p></div>", {
+            marker.bindPopup("<div class='p-4'><h5>My address</h5><p>61 OR Tambo Street, Potchefstroom.</p></div>", {
                 minwidth: 200,
                 maxWidth: 600,
                 className: 'map-custom-popup'
