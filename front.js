@@ -162,6 +162,15 @@ $.ajax({
 
 //message
 
+$.ajax({
+    url: "http://labs.bible.org/api/?passage=Lk%202:1;%204:4&formatting=full",
+    type: 'GET',
+    dataType: 'json',
+    success: function(result) {
+       $('#bibleverse').append()
+    }
+});
+
 /* =========================================
  * styled Leaflet Map
  *  =======================================*/
